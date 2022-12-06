@@ -66,8 +66,8 @@ contract FundingDAO is ReentrancyGuard, AccessControl {
         string calldata imageId
     ) public payable onlyMember("Only members can create new proposal.") {
         require(
-            msg.value == 5 * 10**18,
-            "You need to add 5 MATIC to create a proposal"
+            msg.value == 0.001 * 10**18,
+            "You need to add 0.00 MATIC to create a proposal"
         );
         uint256 proposalId = proposalsCount;
         Proposal storage proposal = proposals[proposalId];

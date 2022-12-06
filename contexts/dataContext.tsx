@@ -1,16 +1,17 @@
 declare let window: any;
 import {
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { toast } from "react-toastify";
-import Web3 from "web3";
+import Web3 from 'web3';
 import FundingDAO from "../abis/FundingDAO.json";
 import { Proposal } from "../utils/interface";
-
+import PropTypes from 'prop-types';
 interface DataContextProps {
   account: string;
   loading: boolean;
@@ -62,11 +63,10 @@ const DataContext = createContext<DataContextProps>({
     return {} as Proposal;
   },
 });
-
-export const DataProvider: React.FC = ({ children }) => {
+export const DataProvider= ( { children }: {children: ReactNode} ) => {
+// export const DataProvider: React.FC <React.ReactNode> = ({children}) => {
   const data = useProviderData();
-
-  return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
+  return (<DataContext.Provider value={data}>{children}</DataContext.Provider>);
 };
 
 export const useData = () => useContext<DataContextProps>(DataContext);
@@ -258,3 +258,7 @@ export const useProviderData = () => {
     vote,
   };
 };
+// DataProvider.propTypes = {
+ 
+//   children: PropTypes.any
+// }
